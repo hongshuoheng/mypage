@@ -1,0 +1,73 @@
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+table,
+td {
+  border: 3px solid black;
+}
+table {
+  width: 800px;
+  height: 400px;
+  text-align: center;
+  background-color: #ddd;
+}
+
+td {
+  font-size: 25px;
+  font-weight: bold;
+}
+label {
+  font-weight: bold;
+  font-size: 24px;
+  margin: 5px 25px;
+}
+
+select {
+  margin-right: 15px;
+  font-size: 25px;
+  width: 100px;
+}
+button {
+  font-size: 25px;
+}
+.select {
+  background-color: cadetblue;
+}
+span {
+  font-weight: bold;
+  font-size: 24px;
+  margin: 5px 25px;
+}
+ul {
+  display: flex;
+  list-style: none;
+}
+li {
+  margin: 0 12px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.three {
+  margin-top: 20px;
+}

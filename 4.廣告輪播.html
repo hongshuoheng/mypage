@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>廣告輪播</title>
+    <link rel="stylesheet" href="/imge.css" />
+  </head>
+
+  <body>
+    <div class="first">
+      <ul>
+        <li><a href="/1.99乘法表.html">九九乘法表</a></li>
+        <li><a href="/2.姓名密碼日期表單.html">驗證表單</a></li>
+        <li><a href="/3.星星評分.html">星星評分</a></li>
+        <li><a href="/8.表格欄位選填.html">表格欄位選填</a></li>
+        <li><a href="#">廣告輪播</a></li>
+        <li><a href="/7.RGB選色.html">RGB選色</a></li>
+      </ul>
+    </div>
+    <h2>廣告輪播牆</h2>
+    <div class="container">
+      <div>
+        <div class="ad-block">
+          <div class="ad hide show">
+            <img id="adImg" src="/imge/pexels-cats-coming-1359307.jpg" alt="" />
+          </div>
+          <div class="ad hide">
+            <img id="adImg" src="/imge/pexels-cats-coming-674572.jpg" alt="" />
+          </div>
+          <div class="ad hide">
+            <img
+              id="adImg"
+              src="/imge/pexels-danielle-daniel-479009.jpg"
+              alt=""
+            />
+          </div>
+          <div class="ad hide">
+            <img id="adImg" src="/imge/pexels-dids-1276553.jpg" alt="" />
+          </div>
+          <div class="ad hide">
+            <img
+              id="adImg"
+              src="/imge/pexels-halil-i̇brahim-çeti̇n-2064110.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div id="page" class="ad-page">
+        <span class="page-select">1</span><span>2</span><span>3</span
+        ><span>4</span><span>5</span>
+      </div>
+
+      <div class="play-btn">
+        <input id="prev-btn" type="button" value="Prev" />
+        <input id="play-btn" class="" type="button" value="播放" />
+        <input id="stop-btn" class="btn-hide" type="button" value="暫停" />
+        <input id="next-btn" type="button" value="Next" />
+      </div>
+    </div>
+
+    <script>
+      //兩個變數一個儲存上一個索引，一個儲存操作造成的索引變化
+      let lastAd = 0;
+      let currentAd = 0;
+      //取得所有寫好的廣告牆div元素，存在變數adlist
+      let adlist = document.getElementsByClassName("ad");
+      let repeatPlay;
+      //取得所有寫好的頁數的span元素，存在變數allpage
+      let allPage = document.getElementById("page").children;
+
+      for (let i = 0; i < allPage.length; i++) {
+        allPage[i].addEventListener("click", function () {
+          showAd(i);
+          stopPlayAd();
+        });
+      }
+      document.getElementById("prev-btn").addEventListener("click", prev);
+      document.getElementById("prev-btn").addEventListener("click", stopPlayAd);
+      document.getElementById("play-btn").addEventListener("click", playAd);
+      document.getElementById("stop-btn").addEventListener("click", stopPlayAd);
+      document.getElementById("next-btn").addEventListener("click", next);
+      document.getElementById("next-btn").addEventListener("click", stopPlayAd);
+
+      playAd();
+
+      //播放廣告的方法，定時執行下一張功能，並將播放按鈕隱藏，原本隱藏的暫停按鈕顯示出來
+      function playAd() {
+        repeatPlay = setInterval(next, 1500);
+        document.getElementById("play-btn").classList.add("btn-hide");
+        document.getElementById("stop-btn").classList.remove("btn-hide");
+      }
+      //依引數，將指定索引的圖片牆show出的方法，並依紀錄上一個索引值的變數把圖片牆隱藏
+      //更新紀錄上一個索引值的變數
+      function showAd(index) {
+        currentAd = index;
+        allPage[lastAd].classList.remove("page-select");
+        adlist[lastAd].classList.remove("show");
+        lastAd = currentAd;
+        adlist[currentAd].classList.add("show");
+        allPage[currentAd].classList.add("page-select");
+      }
+      //下一張功能，將索引指往後+1，並執行上面將圖片牆顯示出的方法
+      function next() {
+        currentAd++;
+        if (currentAd == adlist.length) {
+          currentAd = 0;
+        }
+        showAd(currentAd);
+      }
+      //上一張功能，將索引指往後+1，並執行上面將圖片牆顯示出的方法
+      function prev() {
+        currentAd--;
+        if (currentAd < 0) {
+          currentAd = adlist.length - 1;
+        }
+        showAd(currentAd);
+      }
+      //停止播放廣告的方法，將定時執行功能清空，並將暫停按鈕隱藏，隱藏的播放按鈕顯示出來
+      function stopPlayAd() {
+        clearInterval(repeatPlay);
+        document.getElementById("play-btn").classList.remove("btn-hide");
+        document.getElementById("stop-btn").classList.add("btn-hide");
+      }
+
+      // function ad(imgsrc, desc, link) {
+      //     this.imgsrc = imgsrc;
+      //     this.desc = desc;
+      //     this.link = link;
+      // }
+
+      // let adlist = [
+      //     new ad("images/berries-granola.jpg", "berries-granola", "https://burst.shopify.com/photos/berries-granola?c=coffee"),
+      //     new ad("images/coffee-cup-bubbles.jpg", "coffee-cup-bubbles", "https://burst.shopify.com/photos/coffee-cup-bubbles?c=coffee"),
+      //     new ad("images/iced-coffee-on-cafe-bar.jpg", "iced-coffee-on-cafe-bar", "https://burst.shopify.com/photos/iced-coffee-on-cafe-bar?c=coffee"),
+      //     new ad("images/mug-with-a-fresh-tea-bag-above-it.jpg", "mug-with-a-fresh-tea-bag-above-it", "https://burst.shopify.com/photos/mug-with-a-fresh-tea-bag-above-it?c=coffee"),
+      //     new ad("images/tall-latte-at-cafe.jpg", "tall-latte-at-cafe", "https://burst.shopify.com/photos/tall-latte-at-cafe?c=coffee"),
+      // ];
+    </script>
+  </body>
+</html>

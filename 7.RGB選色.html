@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q1</title>
+    <style>
+      #Q1 {
+        width: 500px;
+        margin: 0 auto;
+      }
+
+      #box1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        color: white;
+        background-color: rgb(0, 0, 0);
+        width: 300px;
+        height: 200px;
+        margin: 20px auto;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      #controlBar div {
+        margin: 10px auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      #controlBar input[type="range"] {
+        width: 225px;
+      }
+      ul {
+        display: flex;
+        list-style: none;
+      }
+      li {
+        margin: 0 12px;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .first {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="first">
+      <ul>
+        <li><a href="/1.99乘法表.html">九九乘法表</a></li>
+        <li><a href="/2.姓名密碼日期表單.html">驗證表單</a></li>
+        <li><a href="/3.星星評分.html">星星評分</a></li>
+        <li><a href="/8.表格欄位選填.html">表格欄位選填</a></li>
+        <li><a href="/4.廣告輪播.html">廣告輪播</a></li>
+        <li><a href="#">RGB選色</a></li>
+      </ul>
+    </div>
+    <div id="Q1">
+      <h2>調整range改變背景顏色</h2>
+      <div id="box1">rgb (0,0,0)</div>
+      <div id="controlBar">
+        <div>
+          <span>紅:</span
+          ><input
+            type="range"
+            name="red"
+            id="red"
+            min="0"
+            max="255"
+            value="0"
+          /><span id="span1" class="">0</span>
+        </div>
+        <div>
+          <span>綠:</span
+          ><input
+            type="range"
+            name="green"
+            id="green"
+            min="0"
+            max="255"
+            value="0"
+          /><span id="span2" class="">0</span>
+        </div>
+        <div>
+          <span>藍:</span
+          ><input
+            type="range"
+            name="blue"
+            id="blue"
+            min="0"
+            max="255"
+            value="0"
+          /><span id="span3" class="">0</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Q1.請在三個input元素的"oninput"事件繫結上function
+
+      // a.使#box1的背景顏色，會依三個input的值變動。
+      // b.#box1的文字也會隨之變化，ex:rgb (120,0,0)、rgb (120,100,50)。
+      // b.且input後面的span內容也會，前面的input變動。
+      //可自行添加id或class
+      let oninput1 = document.getElementById("red");
+      let oninput2 = document.getElementById("green");
+      let oninput3 = document.getElementById("blue");
+      let span1 = document.getElementById("span1");
+      let span2 = document.getElementById("span2");
+      let span3 = document.getElementById("span3");
+      let red = 0;
+      let blue = 0;
+      let green = 0;
+      let box = document.getElementById("box1");
+      oninput1.addEventListener("input", function (event) {
+        red = event.target.value;
+        span1.innerHTML = red;
+        box.innerHTML = `rgb(${red},${green},${blue})`;
+        box.style.backgroundColor = `rgb(${red},${green},${blue})`;
+      });
+      oninput2.addEventListener("input", function (event) {
+        green = event.target.value;
+        span2.innerHTML = green;
+        box.innerHTML = `rgb(${red},${green},${blue})`;
+        box.style.backgroundColor = `rgb(${red},${green},${blue})`;
+      });
+      oninput3.addEventListener("input", function (event) {
+        blue = event.target.value;
+        span3.innerHTML = blue;
+        box.innerHTML = `rgb(${red},${green},${blue})`;
+        box.style.backgroundColor = `rgb(${red},${green},${blue})`;
+      });
+
+      function oninput() {
+        console.log(123);
+      }
+    </script>
+  </body>
+</html>

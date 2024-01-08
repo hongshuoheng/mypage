@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>九九乘法表</title>
+    <style>
+      ul {
+        display: flex;
+        list-style: none;
+      }
+      li {
+        margin: 0 12px;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      table {
+        border: 5px rgb(233, 7, 71) solid;
+        color: rgb(216, 11, 227);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <ul>
+        <li><a href="#">九九乘法表</a></li>
+        <li><a href="/2.姓名密碼日期表單.html">驗證表單</a></li>
+        <li><a href="/3.星星評分.html">星星評分</a></li>
+        <li><a href="/8.表格欄位選填.html">表格欄位選填</a></li>
+        <li><a href="/4.廣告輪播.html">廣告輪播</a></li>
+        <li><a href="/7.RGB選色.html">RGB選色</a></li>
+      </ul>
+    </div>
+    <div><h2>九九乘法表</h2></div>
+    <script>
+      document.write("<div>");
+      document.write("<table>");
+      document.write("<tr>");
+      for (let i = 2; i < 10; i++) {
+        for (let j = 1; j < 10; j++) {
+          document.write(`<td>${i} * ${j} = ${i * j} <td>`);
+        }
+        document.write("</tr>");
+      }
+      document.write("</table>");
+      document.write("</div>");
+    </script>
+  </body>
+</html>

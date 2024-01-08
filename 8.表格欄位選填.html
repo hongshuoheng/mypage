@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表格選填</title>
+    <link rel="stylesheet" href="/表格.css" />
+  </head>
+
+  <body>
+    <div>
+      <ul>
+        <li><a href="/1.99乘法表.html">九九乘法表</a></li>
+        <li><a href="/2.姓名密碼日期表單.html">驗證表單</a></li>
+        <li><a href="/3.星星評分.html">星星評分</a></li>
+        <li><a href="#">表格欄位選填</a></li>
+        <li><a href="/4.廣告輪播.html">廣告輪播</a></li>
+        <li><a href="/7.RGB選色.html">RGB選色</a></li>
+      </ul>
+    </div>
+    <section>
+      <div class="first"><h2>選擇指定表格欄位</h2></div>
+      <div class="container">
+        <table id="table-01">
+          <tr>
+            <td>A1</td>
+            <td>A2</td>
+            <td>A3</td>
+            <td>A4</td>
+            <td>A5</td>
+            <td>A6</td>
+            <td>A7</td>
+            <td>A8</td>
+            <td>A9</td>
+          </tr>
+          <tr>
+            <td>B1</td>
+            <td>B2</td>
+            <td>B3</td>
+            <td>B4</td>
+            <td>B5</td>
+            <td>B6</td>
+            <td>B7</td>
+            <td>B8</td>
+            <td>B9</td>
+          </tr>
+          <tr>
+            <td>C1</td>
+            <td>C2</td>
+            <td>C3</td>
+            <td>C4</td>
+            <td>C5</td>
+            <td>C6</td>
+            <td>C7</td>
+            <td>C8</td>
+            <td>C9</td>
+          </tr>
+          <tr>
+            <td>D1</td>
+            <td>D2</td>
+            <td>D3</td>
+            <td>D4</td>
+            <td>D5</td>
+            <td>D6</td>
+            <td>D7</td>
+            <td>D8</td>
+            <td>D9</td>
+          </tr>
+          <tr>
+            <td>E1</td>
+            <td>E2</td>
+            <td>E3</td>
+            <td>E4</td>
+            <td>E5</td>
+            <td>E6</td>
+            <td>E7</td>
+            <td>E8</td>
+            <td>E9</td>
+          </tr>
+        </table>
+      </div>
+      <div class="three">
+        <label for="row">Row: </label>
+        <select name="row" id="row">
+          <option value="">請選擇</option>
+          <option value="0">A</option>
+          <option value="1">B</option>
+          <option value="2">C</option>
+          <option value="3">D</option>
+          <option value="4">E</option>
+        </select>
+        <label for="column">Column: </label>
+        <select name="column" id="column">
+          <option value="">請選擇</option>
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <option value="3">4</option>
+          <option value="4">5</option>
+          <option value="5">6</option>
+          <option value="6">7</option>
+          <option value="7">8</option>
+          <option value="8">9</option>
+        </select>
+        <button id="selectTd">Select</button>
+        <span id="msg"></span>
+      </div>
+    </section>
+    <script>
+      const row = document.querySelector("#row");
+      const column = document.querySelector("#column");
+      const selectTd = document.querySelector("#selectTd");
+      const table = document.getElementById("table-01");
+      const msg = document.getElementById("msg");
+
+      let selectedCells = [];
+
+      selectTd.addEventListener("click", () => {
+        msg.innerHTML = " ";
+
+        const rowValue = row.options[row.selectedIndex].value;
+        const columnValue = column.options[column.selectedIndex].value;
+        resetSelections();
+
+        if (rowValue && columnValue) {
+          const tableValue = table.rows[rowValue].cells[columnValue];
+          tableValue.classList.add("select");
+          selectedCells.push(tableValue);
+          msg.innerHTML = `你選擇了 ${tableValue.innerHTML} 欄位`;
+        } else if (rowValue) {
+          for (let i = 0; i < table.rows[rowValue].cells.length; i++) {
+            const cell = table.rows[rowValue].cells[i];
+            cell.classList.add("select");
+            selectedCells.push(cell);
+          }
+          msg.innerHTML = `你選擇了 ${
+            row.options[row.selectedIndex].innerHTML
+          } 排`;
+        } else if (columnValue) {
+          for (let i = 0; i < table.rows.length; i++) {
+            const cell = table.rows[i].cells[columnValue];
+            cell.classList.add("select");
+            selectedCells.push(cell);
+          }
+          msg.innerHTML = `你選擇了 ${
+            column.options[column.selectedIndex].innerHTML
+          } 列`;
+        } else {
+          alertMsg();
+        }
+      });
+
+      function resetSelections() {
+        selectedCells.forEach((cell) => cell.classList.remove("select"));
+        selectedCells = [];
+      }
+
+      function alertMsg() {
+        msg.innerHTML = "請選擇";
+      }
+    </script>
+  </body>
+</html>

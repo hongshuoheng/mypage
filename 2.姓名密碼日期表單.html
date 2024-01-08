@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表單</title>
+    <style>
+      .first {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      section {
+        width: 500px;
+        height: 400px;
+        background: bisque;
+        border: 2px solid red;
+        border-radius: 20px;
+        padding: 20px;
+        margin: 20px auto;
+      }
+      ul {
+        display: flex;
+
+        list-style: none;
+      }
+      li {
+        margin: 0 12px;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="first">
+      <ul>
+        <li><a href="/1.99乘法表.html">九九乘法表</a></li>
+        <li><a href="#">驗證表單</a></li>
+        <li><a href="/3.星星評分.html">星星評分</a></li>
+        <li><a href="/8.表格欄位選填.html">表格欄位選填</a></li>
+        <li><a href="/4.廣告輪播.html">廣告輪播</a></li>
+        <li><a href="/7.RGB選色.html">RGB選色</a></li>
+      </ul>
+    </div>
+    <h2>驗證表單</h2>
+    <section>
+      <div class="name">
+        <!-- 帳號 -->
+        <label>帳號:</label>
+        <input
+          type="text"
+          id="idname"
+          size="10"
+        /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+        <span id="idsp1"></span><br />
+        <p>(1.不可空白2.至少2個字以上3.必須全部為中文字)</p>
+        <hr />
+      </div>
+      <!-- ==================================================== -->
+      <div class="password">
+        <!-- 密碼 -->
+        <label>密碼:</label>
+        <input
+          type="password"
+          id="idPwd"
+          size="10"
+        /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+        <span id="idsp"></span><br />
+        <p>(1.不可空白2.至少6個字且必須包含英數字、特殊字元[!@#$%^&*])</p>
+        <!--1.-->
+        <!--<input type="button" id="idbut" value="checkPassword" onclick="checkPwd();" />-->
+        <hr />
+      </div>
+      <!-- =============================================== -->
+      <div class="date">
+        <!-- 日期 -->
+        <label>日期:</label>
+        <input
+          type="text"
+          id="idDate"
+          value=""
+        /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+        <span id="idsp2"></span><br />
+        <p>格式:西元/年/月/日(yyyy/mm/dd)</p>
+      </div>
+    </section>
+    <script>
+      // 1.帳號========================================
+      document.getElementById("idname").addEventListener("blur", checkName);
+      function checkName() {
+        //取得idNam元素
+        let theNamObj = document.getElementById("idname");
+        console.log(theNamObj);
+        //取得idNam元素值
+        let theNamObjVal = theNamObj.value;
+        console.log(theNamObjVal);
+        console.log(typeof theNamObjVal);
+        //判斷元素值是否為空白，密碼長度是否大於6
+        //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+        let sp1 = document.getElementById("idsp1");
+        let theNamObjValLen = theNamObjVal.length;
+        let flag4 = false,
+          flag5 = false,
+          flag6 = false;
+        let ch1;
+        if (theNamObjVal == "") {
+          sp1.innerHTML = "<img src='/imge//error.png' />不可空白";
+        } else if (theNamObjValLen < 2) {
+          sp1.innerHTML = "<img src='/imge//error.png' />至少兩個字以上";
+        } else {
+          for (let i = 0; i < theNamObjValLen; i++) {
+            let ch1 = theNamObjVal.charCodeAt(i);
+            if (ch1 >= "0x4E00" && ch1 <= "0x9FFF") {
+              flag4 = true;
+            } else flag4 = false;
+            sp1.innerHTML = "<img src='/imge/error.png' />姓名有非中文字元";
+            break;
+          }
+          if (flag4 == true) {
+            sp1.innerHTML = "正確";
+          }
+        }
+      }
+
+      // // 帳號結束===========================================
+      // // // 2.密碼
+      document.getElementById("idPwd").addEventListener("blur", checkPwd);
+      function checkPwd() {
+        //取得idPwd元素
+        let thePwdObj = document.getElementById("idPwd");
+        console.log(thePwdObj);
+        //取得idPwd元素值
+        let thePwdObjVal = thePwdObj.value;
+        console.log(thePwdObjVal);
+        console.log(typeof thePwdObjVal);
+
+        //判斷元素值是否為空白，密碼長度是否大於6
+        //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+        let sp = document.getElementById("idsp");
+        let thePwdObjValLen = thePwdObjVal.length;
+        let flag1 = false,
+          flag2 = false,
+          flag3 = false;
+
+        if (thePwdObjVal == "")
+          sp.innerHTML = "<img src='/imge//error.png' />不可空白";
+        else if (thePwdObjValLen >= 6) {
+          // sp.innerHTML=">=6";
+          for (let i = 0; i < thePwdObjValLen; i++) {
+            let ch = thePwdObjVal.charAt(i).toUpperCase();
+            if (ch >= "A" && ch <= "Z") flag1 = true;
+            else if (ch >= "0" && ch <= "9") flag2 = true;
+            else if ((ch = "!@#$%^&*")) flag3 = true;
+            if (flag1 && flag2 && flag3) break;
+          }
+          if (flag1 && flag2 && flag3) sp.innerHTML = "正確";
+        } else {
+          sp.innerHTML =
+            "<img src='/imge//error.png' />至少6個字且必須包含英數字、特殊字元[!@#$%^&*]";
+        }
+      }
+      //2.密碼結束==========================================
+      // 3.日期開始=======================================
+      // <div class="date">
+      //     <!-- 日期 -->
+      //     <label>日期:</label>
+      //     <input type="text" id="iddate" size="10" /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+      //     <span id="idsp2"></span><br />
+      //     <p>格式:西元/年/月/日(yyyy/mm/dd)</p>
+      // </div>
+      document.getElementById("idDate").addEventListener("blur", checkDat);
+      function checkDat() {
+        let theDate = document.getElementById("idDate");
+        console.log(theDate);
+        let theDateVal = theDate.value;
+        console.log(theDateVal);
+        console.log(typeof theDateVal);
+        let sp = document.getElementById("idsp2");
+        sp.innerHTML = "";
+        let checkDat1 = new Date(theDateVal);
+        let y = checkDat1.getFullYear();
+        let m = checkDat1.getMonth();
+        let d = checkDat1.getDate();
+        let split = theDateVal.split("/");
+        let theYear = split[0]; //年
+        let theMonth = split[1]; //月
+        let theDay = split[2]; //日
+        console.log(`${typeof theDay},${typeof d}`);
+        console.log(`${theMonth},${m}`);
+        console.log(`${theYear},${y}`);
+        if (
+          parseInt(theYear) == y &&
+          parseInt(theMonth) == m + 1 &&
+          parseInt(theDay) == d
+        ) {
+          //將字串(年)驗證:大於等於1000(四位數)與小於等於9999之間
+          if (parseInt(theYear) >= 1000 && parseInt(theYear) <= 9999) {
+            //將字串(月)驗證:大於等於1與小於等於12之間
+            if (parseInt(theMonth) >= 1 && parseInt(theMonth) <= 12) {
+              //將字串(日)驗證:大於等於1與小於等於31之間
+              if (parseInt(theDay) >= 1 && parseInt(theDay) <= 31) {
+                sp.innerHTML = "正確";
+              } else {
+                sp.innerHTML = "<img src='/imge/error.png' />日期格式錯誤";
+              }
+            } else {
+              sp.innerHTML = "<img src='/imge/error.png' />月份格式錯誤";
+            }
+          } else {
+            sp.innerHTML = "<img src='/imge/error.png' />年份格式錯誤";
+          }
+        } else {
+          sp.innerHTML = "<img src='/imge/error.png' />格式錯誤";
+        }
+      }
+    </script>
+  </body>
+</html>
